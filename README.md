@@ -24,10 +24,25 @@ X = train_data.iloc[:,0:23].values
 y = train_data.iloc[:,24].values
 
 ```
-From the X variable, we need to identify the missing values. 
+From the X variable, we need to identify the missing values.
+```
 # Dealing with missing values
 from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values = 'NaN', strategy = 'most_frequent', axis = 0)
 imputer = imputer.fit(X[:, 0:4])
 X[:,0:4] = imputer.transform(X[:,0:4])
+
+# From Range 4 to 23, since it is the categorical values (Ordinal and Categorical). 
+# I am going to take out of them 
+X = pd.DataFrame(X)
+for i in range(4,23):
+    temp_X = X[X[i].notnull()]
+    temp_Y = y[X[i].notnull()]
+    
+    # Assigning numbers
+    X = temp_X
+    y = temp_Y
+
+X = X.values 
 ```
+
