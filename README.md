@@ -5,5 +5,5 @@ based on nominal data, ordinal data, and binary data.
 ## Using Random Forest & PCA
 In this tutorial, I am using a **Random Forest** Machine Learning Method and **Principal Component Analysis (PCA)** to analyse the information.
 You may access the training data from the followings: 
-- Training Data [A](train.csv)
-- Test Data 
+- [Training Data](IdhamHabibie/cat_in_the_data/train.csv)
+- [Test Data] (IdhamHabibie/cat_in_the_data/test.csv)
