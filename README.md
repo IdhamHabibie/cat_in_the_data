@@ -11,7 +11,6 @@ You may access the training data from the followings:
 ## How the Code works 
 First of all, we need to read all datasets, especially on the training and test data.
 
-
 ```
 import numpy as np 
 import pandas as pd
@@ -24,10 +23,11 @@ test_data = pd.read_csv("test.csv")
 X = train_data.iloc[:,0:23].values
 y = train_data.iloc[:,24].values
 
+```
+From the X variable, we need to identify the missing values. 
 # Dealing with missing values
 from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values = 'NaN', strategy = 'most_frequent', axis = 0)
 imputer = imputer.fit(X[:, 0:4])
 X[:,0:4] = imputer.transform(X[:,0:4])
-
 ```
