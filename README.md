@@ -91,4 +91,38 @@ cm = confusion_matrix(y_test, y_pred)
 print(cm)
 ```
 #### The confusion matrix has a good precision and accuracy.  
+#### Now, let's do this in the Testing Data 
+
+```
+# Testing into the dataset test.csv
+X_testing = test_data.iloc[:,0:23].values
+
+# Taking care of missing data
+from sklearn.preprocessing import Imputer
+imputer = Imputer(missing_values = 'NaN', strategy = 'most_frequent', axis = 0)
+imputer = imputer.fit(X_testing[:, 0:17])
+X_testing[:,0:17] = imputer.transform(X_testing[:,0:17])
+
+# Implementing Label Encoding
+for i in range(4,23):
+    X_testing[:, i] = str(X_testing[:,i])
+    X_testing[:, i] = labelencoder_X.fit_transform((X_testing[:, i]))
+
+
+# Encode the Ordinal Encoding
+from sklearn.preprocessing import OrdinalEncoder
+OrdinalEncoder_X = OrdinalEncoder(categories = 'auto')
+X_testing[:,17:23] = OrdinalEncoder_X.fit_transform(X_testing[:,17:23])
+
+# Implementing PCA for this part. 
+# Applying PCA
+from sklearn.decomposition import PCA
+pca = PCA(n_components = 2)
+X_testing = pca.fit_transform(X_testing)
+explained_variance = pca.explained_variance_ratio_
+# Predicting the Test set results
+final_result = classifier.predict(X_testing)
+print(final_result)
+```
+
 
